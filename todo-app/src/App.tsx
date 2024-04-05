@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { taskApi } from './repositories/taskApi';
-import { Task } from './models/Task';
+import { Task } from './types/Task';
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
-  
+
   useEffect(() => {
     taskApi.getTasks()
       .then((data) => {

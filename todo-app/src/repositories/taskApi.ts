@@ -1,4 +1,4 @@
-import type {Task} from '../models/Task';
+import type {Task} from '../types/Task';
 
 class TaskApi {
     getTasks(): Promise<Task[]> {
