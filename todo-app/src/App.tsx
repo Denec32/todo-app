@@ -15,7 +15,7 @@ function App() {
   
   return (
     <>
-      <h1>Denec's perefect todo list</h1>
+      <h1>Denec's silly todo list</h1>
       <ul>
         {tasks.map(task => {
           return (<li key={task.id}><p>{task.text}</p></li>)
