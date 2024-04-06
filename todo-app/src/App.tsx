@@ -13,7 +13,7 @@ function App() {
         setTasks(data);
       })
   });
-  
+
   return (
     <>
       <h1>Denec's silly todo list</h1>
@@ -22,7 +22,7 @@ function App() {
           return (<li key={task.id} id={task.id.toString()}><p>{task.text}</p></li>)
         })}
       </ul>
-      <TaskForm setTasks={setTasks}/>
+      <TaskForm setTasks={setTasks} />
     </>
   )
 }

@@ -10,20 +10,20 @@ function TaskForm(props: TaskFormProps) {
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         const target = event.target as typeof event.target & {
-          text: { value: string };
+            text: { value: string };
         };
-    
+
         const text = target.text.value;
-        const newTask = taskApi.addTask({id : 0, text : text});
+        const newTask = taskApi.addTask({ id: 0, text: text });
         props.setTasks((tasks) => [...tasks, newTask]);
-      }
+    }
 
     return (
         <form onSubmit={handleSubmit}>
-        <input type='text' name='text'></input>
-        <button type='submit'>add</button>
+            <input type='text' name='text'></input>
+            <button type='submit'>add</button>
         </form>
-      )
+    )
 }
 
 export default TaskForm
