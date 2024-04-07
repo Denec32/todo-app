@@ -1,4 +1,4 @@
-package com.denec.todo;
+package com.denec.todo.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
