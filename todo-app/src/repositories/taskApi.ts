@@ -11,8 +11,19 @@ class TaskApi {
         })
     }
 
-    addTask(newTask: Task): Task {
-        return newTask;
+    addTask(newTask: Task): Promise<Task> {
+        return fetch(this.taskEndpointLink, {
+            method: 'POST',
+            headers: {
+            'Accept': '*/*',
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newTask)
+        })
+        .then(res => res.json())
+        .then(res => {
+            return res as Task
+        });
     }
 }
 

@@ -30,7 +30,7 @@ public class TaskController {
         .orElseThrow(() -> new TaskNotFoundException(id));
     }
 
-    @PostMapping("/task/")
+    @PostMapping("/task")
     public Task addTask(@RequestBody Task newTask) {
         return repository.save(newTask);
     }

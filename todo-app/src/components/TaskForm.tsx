@@ -14,8 +14,8 @@ function TaskForm(props: TaskFormProps) {
         };
 
         const text = target.text.value;
-        const newTask = taskApi.addTask({ id: 0, text: text });
-        props.setTasks((tasks) => [...tasks, newTask]);
+        taskApi.addTask({ id: 0, text: text })
+        .then(task => props.setTasks((tasks) => [...tasks, task]));
     }
 
     return (
