@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { taskApi } from './repositories/taskApi';
 import { Task } from './types/Task';
-import TaskForm from './components/TaskForm';
+import TaskForm from './components/TaskForm/TaskForm';
 import './App.css'
-import TaskItem from './components/TaskItem';
+import TaskItem from './components/TaskItem/TaskItem';
 
 function App() {
     const [tasks, setTasks] = useState<Task[]>([]);

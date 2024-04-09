@@ -1,4 +1,4 @@
-import { Task } from "../types/Task"
+import { Task } from "../../types/Task"
 
 
 type TaskItemProps = {
@@ -14,7 +14,7 @@ function TaskItem(props: TaskItemProps) {
     return (
         <>
             <span>{props.task.text}</span>
-            <button onClick={deleteTask}>x</button>
+            <button onClick={deleteTask}>×</button>
         </>
     )
 }
