@@ -1,9 +1,8 @@
-import { SetStateAction, useState } from "react";
-import { taskApi } from "../repositories/taskApi";
+import { useState } from "react";
 import { Task } from "../types/Task";
 
 type TaskFormProps = {
-    setTasks: React.Dispatch<SetStateAction<Task[]>>
+    onClickAdd : (task : Task) => void
 }
 
 function TaskForm(props: TaskFormProps) {
@@ -19,11 +18,9 @@ function TaskForm(props: TaskFormProps) {
         const target = event.target as typeof event.target & {
             text: { value: string };
         };
-
         const text = target.text.value;
-        taskApi.addTask({ id: 0, text: text })
-            .then(task => props.setTasks((tasks) => [...tasks, task]));
 
+        props.onClickAdd({ id: 0, text: text });
         setInputText("");
     }
 

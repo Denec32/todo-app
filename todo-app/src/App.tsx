@@ -20,6 +20,11 @@ function App() {
         setTasks(tasks.filter(task => task.id !== id));
     }
 
+    function addTask(task: Task) {
+        taskApi.addTask(task)
+            .then(task => setTasks((tasks) => [...tasks, task]));
+    }
+
     return (
         <>
             <h1>Denec's silly todo list</h1>
@@ -28,7 +33,7 @@ function App() {
                     return (<li key={task.id}><TaskItem task={task} onClickDelete={deleteTask} /></li>)
                 })}
             </ul>
-            <TaskForm setTasks={setTasks} />
+            <TaskForm onClickAdd={addTask} />
         </>
     )
 }
