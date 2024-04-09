@@ -6,26 +6,31 @@ import './App.css'
 import TaskItem from './components/TaskItem';
 
 function App() {
-	const [tasks, setTasks] = useState<Task[]>([]);
+    const [tasks, setTasks] = useState<Task[]>([]);
 
-	useEffect(() => {
-		taskApi.getTasks()
-			.then((data) => {
-				setTasks(data);
-			})
-	}, []);
+    useEffect(() => {
+        taskApi.getTasks()
+            .then((data) => {
+                setTasks(data);
+            })
+    }, []);
 
-	return (
-		<>
-			<h1>Denec's silly todo list</h1>
-			<ul>
-				{tasks.map(task => {
-					return (<li key={task.id}><TaskItem task={task}/></li>)
-				})}
-			</ul>
-			<TaskForm setTasks={setTasks} />
-		</>
-	)
+    function deleteTask(id: number) {
+        taskApi.deleteTask(id);
+        setTasks(tasks.filter(task => task.id !== id));
+    }
+
+    return (
+        <>
+            <h1>Denec's silly todo list</h1>
+            <ul>
+                {tasks.map(task => {
+                    return (<li key={task.id}><TaskItem task={task} onClickDelete={deleteTask} /></li>)
+                })}
+            </ul>
+            <TaskForm setTasks={setTasks} />
+        </>
+    )
 }
 
 export default App

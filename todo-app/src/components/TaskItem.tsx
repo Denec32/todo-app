@@ -1,15 +1,14 @@
-import { taskApi } from "../repositories/taskApi";
 import { Task } from "../types/Task"
 
 
 type TaskItemProps = {
-    task: Task
+    task : Task,
+    onClickDelete : (id : number) => void
 }
 
 function TaskItem(props: TaskItemProps) {
     function deleteTask() {
-        console.log(props.task.text);
-        taskApi.deleteTask(props.task.id);
+        props.onClickDelete(props.task.id);
     }
 
     return (
