@@ -22,7 +22,7 @@ function TaskForm(props: TaskFormProps) {
 
         const text = target.text.value;
         taskApi.addTask({ id: 0, text: text })
-        .then(task => props.setTasks((tasks) => [...tasks, task]));
+            .then(task => props.setTasks((tasks) => [...tasks, task]));
 
         setInputText("");
     }

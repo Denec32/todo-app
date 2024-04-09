@@ -25,6 +25,12 @@ class TaskApi {
             return res as Task
         });
     }
+
+    deleteTask(id: number) {
+        return fetch(this.taskEndpointLink + '/' + id, {
+            method: 'DELETE',
+        });
+    }
 }
 
 export const taskApi = new TaskApi();
