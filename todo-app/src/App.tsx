@@ -25,13 +25,20 @@ function App() {
             .then(task => setTasks((tasks) => [...tasks, task]));
     }
 
+    function putTask(task: Task, id: number) {
+        taskApi.putTask(task, id)
+            .then(task => setTasks(tasks.map(t => t.id != task.id ? t : task)));
+    }
+
     return (
         <>
             <h1>Denec's silly todo list</h1>
             <ul>
-                {tasks.map(task => {
-                    return (<li key={task.id}><TaskItem task={task} onClickDelete={deleteTask} /></li>)
-                })}
+                {tasks.map(task =>
+                    <li key={task.id}>
+                        <TaskItem task={task} deleteTask={deleteTask} putTask={putTask} />
+                    </li>)
+                }
             </ul>
             <TaskForm onClickAdd={addTask} />
         </>

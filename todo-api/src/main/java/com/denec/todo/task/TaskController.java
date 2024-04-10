@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,6 +36,7 @@ public class TaskController {
         return repository.save(newTask);
     }
 
+    @PutMapping("/task/{id}")
     public Task putTask(@RequestBody Task newTask, @PathVariable Long id) {
         return repository.findById(id)
         .map(task -> {
