@@ -1,19 +1,18 @@
-.todo-item {
-    text-align: left;
+.todo-list-item {
+    align-items: center;
 }
 
-.edit-button {
-    background-color: rosybrown;
+.todo-item {
+    text-align: left;
+    width: 90%;
     border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    margin: 2px 2px;
-    cursor: pointer;
-    border-radius: 5px;
-    width: 20px;
-    height: 20px;
+    background-color: transparent;
+}
+
+.todo-item:focus {
+    border-color: rgba(229, 103, 23, 0.8);
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 1px;
+    outline: 0 none;
 }
 
 .delete-button {
@@ -23,7 +22,7 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    margin: 2px 2px;
+    margin: 2px 4px;
     cursor: pointer;
     border-radius: 5px;
     width: 20px;

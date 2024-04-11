@@ -9,33 +9,25 @@ type TaskItemProps = {
 }
 
 function TaskItem(props: TaskItemProps) {
-    const [isEdit, setIsEdit] = useState<boolean>(false);
     const [text, setText] = useState<string>(props.task.text);
+
     function deleteTask() {
         props.deleteTask(props.task.id);
-    }
-
-    function editTask() {
-        if (isEdit && props.task.text !== text) {
-            props.putTask({ id: props.task.id, text: text }, props.task.id);
-        }
-
-        setIsEdit(!isEdit);
     }
 
     function changeInput(event: React.ChangeEvent<HTMLInputElement>) {
         event.preventDefault();
         const text = event.target.value;
-        setText(text);
+        props.putTask({ id: props.task.id, text: text }, props.task.id);
 
+        setText(text);
     }
 
     return (
-        <div className="todo-item">
-            {isEdit ? <input value={text} onChange={changeInput} /> : <span>{text}</span>}
-            <button onClick={editTask} className="edit-button">o</button>
+        <li className="todo-list-item">
+            <input value={text} onChange={changeInput} className="todo-item"/>
             <button onClick={deleteTask} className="delete-button">×</button>
-        </div>
+        </li>
     )
 }
 

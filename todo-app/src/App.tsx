@@ -34,10 +34,7 @@ function App() {
         <>
             <h1>Denec's silly todo list</h1>
             <ul>
-                {tasks.map(task =>
-                    <li key={task.id}>
-                        <TaskItem task={task} deleteTask={deleteTask} putTask={putTask} />
-                    </li>)
+                {tasks.map(task => <TaskItem key={task.id} task={task} deleteTask={deleteTask} putTask={putTask} />)
                 }
             </ul>
             <TaskForm onClickAdd={addTask} />
