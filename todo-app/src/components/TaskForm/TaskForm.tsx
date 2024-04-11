@@ -27,7 +27,7 @@ function TaskForm(props: TaskFormProps) {
     return (
         <form onSubmit={handleSubmit}>
             <input onChange={changeInputText} type='text' name='text' value={inputText}></input>
-            <button type='submit'>add</button>
+            <button type='submit' className="add-button">add</button>
         </form>
     )
 }
