@@ -4,9 +4,11 @@ import { Task } from './types/Task';
 import TaskForm from './components/TaskForm/TaskForm';
 import './App.css'
 import TaskItem from './components/TaskItem/TaskItem';
+import LoginWindow from './components/LoginWindow/LoginWindow';
 
 function App() {
     const [tasks, setTasks] = useState<Task[]>([]);
+    const [showLoginWindw, setShowLoginWindow] = useState<boolean>(false);
 
     useEffect(() => {
         taskApi.getTasks()
@@ -30,9 +32,15 @@ function App() {
             .then(task => setTasks(tasks.map(t => t.id != task.id ? t : task)));
     }
 
+    function handleShowLoginWindow() {
+        setShowLoginWindow(!showLoginWindw);
+    }
+
+
     return (
         <>
-            <h1>Denec's silly todo list</h1>
+            {showLoginWindw && <LoginWindow/>}
+            <h1>Denec's silly todo list. <a onClick={handleShowLoginWindow}>Login</a></h1>
             <ul>
                 {tasks.map(task => <TaskItem key={task.id} task={task} deleteTask={deleteTask} putTask={putTask} />)
                 }
