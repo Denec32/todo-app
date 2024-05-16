@@ -21,8 +21,8 @@ function LoginWindow() {
 
     return (
         <div className='login-window'>
-            <input placeholder='username' value={username} onChange={handleUsernameChange}></input>
-            <input placeholder='password' value={password} onChange={handlePasswordChange}></input>
+            <input className='login-input' placeholder='username' value={username} onChange={handleUsernameChange}></input>
+            <input className='login-input' placeholder='password' value={password} onChange={handlePasswordChange}></input>
             <button onClick={handleSignInSubmit}>Sign in</button>
         </div>
     )
