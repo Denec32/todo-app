@@ -3,6 +3,7 @@ package com.denec.todo.role;
 import java.util.Set;
 
 import com.denec.todo.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,9 +20,9 @@ public class Role {
     private Long id;
     private String name;
 
-    @ManyToMany
+    @JsonIgnore
+    @ManyToMany(mappedBy = "roles")
     private Set<User> users;
-
 
     public Long getId() {
         return this.id;

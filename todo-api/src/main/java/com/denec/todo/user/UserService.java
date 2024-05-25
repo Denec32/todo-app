@@ -1,5 +1,7 @@
 package com.denec.todo.user;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,11 +12,25 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Iterable<User> findAll() {
-        return userRepository.findAll();
+    public User create(User user) {
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new RuntimeException("Пользователь существует");
+        }
+        
+        return userRepository.save(user);
     }
 
-    public User add(User newUser) {
-        return userRepository.save(newUser);
+    public User getByUsername(String username) {
+        return userRepository.findByUsername(username)
+            .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
+    }
+
+    public UserDetailsService userDetailsService() {
+        return this::getByUsername;
+    }
+
+    public User getCurrentUser() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return getByUsername(username);
     }
 }
