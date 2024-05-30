@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './LoginWindow.css'
+import { authApi } from '../../repositories/authApi';
 
 function LoginWindow() {
     const [username, setUsername] = useState<string>('');
@@ -17,6 +18,8 @@ function LoginWindow() {
 
     function handleSignInSubmit(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
+        authApi.login({username, password})
+        .then(token => console.log(token))
     }
 
     return (
