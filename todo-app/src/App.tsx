@@ -11,7 +11,7 @@ function App() {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [showLoginWindw, setShowLoginWindow] = useState<boolean>(false);
     const [loggedIn, setLoggedIn] = useState<boolean>(cookieApi.hasJwt());
-
+    const [username, setUsername] = useState<string>('Guest');
     useEffect(() => {
         taskApi.getTasks()
             .then((data) => {
@@ -45,8 +45,8 @@ function App() {
 
     return (
         <>
-            {showLoginWindw && <LoginWindow setLoggedIn={setLoggedIn}/>}
-            <h1>Denec's silly todo list.</h1>
+            {showLoginWindw && <LoginWindow setLoggedIn={setLoggedIn} setLoginUsername={setUsername}/>}
+            <h1>{loggedIn ? username : 'No one'}' silly todo list.</h1>
             <h1>
                 {loggedIn ? <a onClick={logout}>Log out</a> : <a onClick={handleShowLoginWindow}>Login</a>}
             </h1>

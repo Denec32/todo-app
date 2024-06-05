@@ -4,6 +4,7 @@ import { authApi } from '../../repositories/authApi';
 
 type LoginProps = {
     setLoggedIn: (logged: boolean) => void
+    setLoginUsername: (username: string) => void
 }
 
 function LoginWindow(props : LoginProps) {
@@ -23,7 +24,12 @@ function LoginWindow(props : LoginProps) {
     function handleSignInSubmit(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
         authApi.login({username, password})
-        .then(() => props.setLoggedIn(true));
+        .then(() => {
+            props.setLoggedIn(true);
+            authApi.getUsername()
+            .then((name) => props.setLoginUsername(name));
+        });
+
     }
 
     return (
