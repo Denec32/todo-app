@@ -35,7 +35,13 @@ public class JwtService {
             claims.put("roles", customUser.getRoles());
         }
 
-        return generateToken(claims, userDetails);
+        return Jwts.builder()
+                .claims(claims)
+                .subject(userDetails.getUsername())
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + 100_000 * 60 * 24))
+                .signWith(getSigningKey())
+                .compact();
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
@@ -46,13 +52,6 @@ public class JwtService {
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolvers) {
         final Claims claims = extractAllClaims(token);
         return claimsResolvers.apply(claims);
-    }
-
-    private String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
-        return Jwts.builder().claims(extraClaims).subject(userDetails.getUsername())
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 100_000 * 60 * 24))
-                .signWith(getSigningKey()).compact();
     }
 
     private boolean isTokenExpired(String token) {
