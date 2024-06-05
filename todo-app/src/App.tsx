@@ -5,10 +5,12 @@ import TaskForm from './components/TaskForm/TaskForm';
 import './App.css'
 import TaskItem from './components/TaskItem/TaskItem';
 import LoginWindow from './components/LoginWindow/LoginWindow';
+import { cookieApi } from './repositories/cookieApi';
 
 function App() {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [showLoginWindw, setShowLoginWindow] = useState<boolean>(false);
+    const [loggedIn, setLoggedIn] = useState<boolean>(cookieApi.hasJwt());
 
     useEffect(() => {
         taskApi.getTasks()
@@ -36,16 +38,26 @@ function App() {
         setShowLoginWindow(!showLoginWindw);
     }
 
+    function logout() {
+        cookieApi.deleteJwt();
+        setLoggedIn(false);
+    }
 
     return (
         <>
-            {showLoginWindw && <LoginWindow/>}
-            <h1>Denec's silly todo list. <a onClick={handleShowLoginWindow}>Login</a></h1>
+            {showLoginWindw && <LoginWindow setLoggedIn={setLoggedIn}/>}
+            <h1>Denec's silly todo list.</h1>
+            <h1>
+                {loggedIn ? <a onClick={logout}>Log out</a> : <a onClick={handleShowLoginWindow}>Login</a>}
+            </h1>
+            {loggedIn ? 
+            <>
             <ul>
-                {tasks.map(task => <TaskItem key={task.id} task={task} deleteTask={deleteTask} putTask={putTask} />)
-                }
+                { tasks.map(task => <TaskItem key={task.id} task={task} deleteTask={deleteTask} putTask={putTask} />)}
             </ul>
             <TaskForm onClickAdd={addTask} />
+            </> : <></>
+            }
         </>
     )
 }

@@ -1,4 +1,5 @@
 import { SignInRequest } from "../types/SignInRequest";
+import { cookieApi } from "./cookieApi";
 
 class AuthApi {
     signInEndpoint: string = 'http://localhost:8080/auth/sign-in';
@@ -14,6 +15,7 @@ class AuthApi {
         })
         .then(res => res.json())
         .then(res => {
+            cookieApi.setJwt(res.token as string);
             return res.token as string;
         })
     }
