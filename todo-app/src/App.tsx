@@ -6,11 +6,12 @@ import './App.css'
 import TaskItem from './components/TaskItem/TaskItem';
 import LoginWindow from './components/LoginWindow/LoginWindow';
 import { cookieApi } from './repositories/cookieApi';
+import NavBar from './components/NavBar/NavBar';
 
 function App() {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [showLoginWindw, setShowLoginWindow] = useState<boolean>(false);
-    const [loggedIn, setLoggedIn] = useState<boolean>(cookieApi.hasJwt());
+    const [isLoggedIn, setLoggedIn] = useState<boolean>(cookieApi.hasJwt());
     const [username, setUsername] = useState<string>('Guest');
     useEffect(() => {
         taskApi.getTasks()
@@ -38,25 +39,26 @@ function App() {
         setShowLoginWindow(!showLoginWindw);
     }
 
-    function logout() {
+    function handleSignOut() {
         cookieApi.deleteJwt();
         setLoggedIn(false);
     }
 
     return (
         <>
-            {showLoginWindw && <LoginWindow setLoggedIn={setLoggedIn} setLoginUsername={setUsername}/>}
-            <h1>{loggedIn ? username : 'No one'}' silly todo list.</h1>
+            <NavBar/>
+            {showLoginWindw && <LoginWindow setLoggedIn={setLoggedIn} setLoginUsername={setUsername} />}
+            <h1>{isLoggedIn ? username : 'No one'}' silly todo list.</h1>
             <h1>
-                {loggedIn ? <a onClick={logout}>Log out</a> : <a onClick={handleShowLoginWindow}>Login</a>}
+                {isLoggedIn ? <a onClick={handleSignOut}>Sign out</a> : <a onClick={handleShowLoginWindow}>Sign in</a>}
             </h1>
-            {loggedIn ? 
-            <>
-            <ul>
-                { tasks.map(task => <TaskItem key={task.id} task={task} deleteTask={deleteTask} putTask={putTask} />)}
-            </ul>
-            <TaskForm onClickAdd={addTask} />
-            </> : <></>
+            {isLoggedIn &&
+                <>
+                    <ul>
+                        {tasks.map(task => <TaskItem key={task.id} task={task} deleteTask={deleteTask} putTask={putTask} />)}
+                    </ul>
+                    <TaskForm onClickAdd={addTask} />
+                </>
             }
         </>
     )
