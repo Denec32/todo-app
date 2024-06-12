@@ -2,12 +2,11 @@ import { useState } from 'react'
 import './LoginWindow.css'
 import { authApi } from '../../repositories/authApi';
 
-type LoginProps = {
-    setLoggedIn: (logged: boolean) => void
-    setLoginUsername: (username: string) => void
+type LoginWindowProps = {
+    setLoggedIn: (value: boolean) => void
 }
 
-function LoginWindow(props : LoginProps) {
+function LoginWindow(props: LoginWindowProps) {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
@@ -23,13 +22,10 @@ function LoginWindow(props : LoginProps) {
 
     function handleSignInSubmit(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
-        authApi.login({username, password})
-        .then(() => {
-            props.setLoggedIn(true);
-            authApi.getUsername()
-            .then((name) => props.setLoginUsername(name));
+        authApi.login({ username, password })
+        .then((token) => {
+            if (token) props.setLoggedIn(true)
         });
-
     }
 
     return (

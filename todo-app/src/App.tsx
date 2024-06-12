@@ -4,21 +4,22 @@ import { Task } from './types/Task';
 import TaskForm from './components/TaskForm/TaskForm';
 import './App.css'
 import TaskItem from './components/TaskItem/TaskItem';
-import LoginWindow from './components/LoginWindow/LoginWindow';
 import { cookieApi } from './repositories/cookieApi';
 import NavBar from './components/NavBar/NavBar';
 
 function App() {
     const [tasks, setTasks] = useState<Task[]>([]);
-    const [showLoginWindw, setShowLoginWindow] = useState<boolean>(false);
-    const [isLoggedIn, setLoggedIn] = useState<boolean>(cookieApi.hasJwt());
-    const [username, setUsername] = useState<string>('Guest');
+    const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
+
     useEffect(() => {
-        taskApi.getTasks()
-            .then((data) => {
-                setTasks(data);
-            })
+        taskApi.getTasks().then((fetchedTasks) => {
+            setTasks(fetchedTasks);
+        })
     }, []);
+
+    useEffect(() => {
+        setLoggedIn(cookieApi.hasJwt());
+    }, [isLoggedIn]);
 
     function deleteTask(id: number) {
         taskApi.deleteTask(id);
@@ -35,28 +36,15 @@ function App() {
             .then(task => setTasks(tasks.map(t => t.id != task.id ? t : task)));
     }
 
-    function handleShowLoginWindow() {
-        setShowLoginWindow(!showLoginWindw);
-    }
-
-    function handleSignOut() {
-        cookieApi.deleteJwt();
-        setLoggedIn(false);
-    }
+    const taskList = tasks.map(task => <TaskItem key={task.id} task={task} deleteTask={deleteTask} putTask={putTask} />);
 
     return (
         <>
-            <NavBar/>
-            {showLoginWindw && <LoginWindow setLoggedIn={setLoggedIn} setLoginUsername={setUsername} />}
-            <h1>{isLoggedIn ? username : 'No one'}' silly todo list.</h1>
-            <h1>
-                {isLoggedIn ? <a onClick={handleSignOut}>Sign out</a> : <a onClick={handleShowLoginWindow}>Sign in</a>}
-            </h1>
+            <NavBar isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
+            <h1>silly todo list.</h1>
             {isLoggedIn &&
                 <>
-                    <ul>
-                        {tasks.map(task => <TaskItem key={task.id} task={task} deleteTask={deleteTask} putTask={putTask} />)}
-                    </ul>
+                    <ul>{taskList}</ul>
                     <TaskForm onClickAdd={addTask} />
                 </>
             }
