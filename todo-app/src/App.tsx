@@ -12,12 +12,6 @@ function App() {
     const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
 
     useEffect(() => {
-        taskApi.getTasks().then((fetchedTasks) => {
-            setTasks(fetchedTasks);
-        })
-    }, []);
-
-    useEffect(() => {
         setLoggedIn(cookieApi.hasJwt());
     }, [isLoggedIn]);
 

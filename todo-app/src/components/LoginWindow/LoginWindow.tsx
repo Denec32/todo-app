@@ -24,7 +24,7 @@ function LoginWindow(props: LoginWindowProps) {
         event.preventDefault();
         authApi.login({ username, password })
         .then((token) => {
-            if (token) props.setLoggedIn(true)
+            if (token) props.setLoggedIn(true);
         });
     }
 

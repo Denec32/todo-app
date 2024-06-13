@@ -2,6 +2,7 @@ import { useState } from 'react';
 import LoginWindow from '../LoginWindow/LoginWindow';
 import './NavBar.css'
 import { cookieApi } from '../../repositories/cookieApi';
+import { authApi } from '../../repositories/authApi';
 
 type NavBarProps = {
     isLoggedIn: boolean
@@ -24,7 +25,7 @@ function NavBar(props: NavBarProps) {
 
     if (props.isLoggedIn) {
         content = <>
-            <li className="navbar-item"><a>Your username</a></li>
+            <li className="navbar-item"><a>{authApi.getUsername()}</a></li>
             <li className="navbar-item"><a onClick={handleSignOutClick}>Sign out</a></li>
         </>
     } else {
