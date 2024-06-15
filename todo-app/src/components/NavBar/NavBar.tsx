@@ -21,26 +21,27 @@ function NavBar(props: NavBarProps) {
         props.setLoggedIn(false);
     }
 
-    let content;
+    let rightContent;
 
     if (props.isLoggedIn) {
-        content = <>
-            <li className="navbar-item"><a>{authApi.getUsername()}</a></li>
-            <li className="navbar-item"><a onClick={handleSignOutClick}>Sign out</a></li>
+        rightContent = <>
+            <a className="navbar-item">{authApi.getUsername()}</a>
+            <a className="navbar-item" onClick={handleSignOutClick}>Sign out</a>
         </>
     } else {
-        content = <>
-            <li className="navbar-item"><a>Register</a></li>
-            <li className="navbar-item"><a onClick={handleSignInClick}>Sign in</a></li>
+        rightContent = <>
+            <a className="navbar-item">Register</a>
+            <a className="navbar-item" onClick={handleSignInClick}>Sign in</a>
         </>
     }
 
     return (
         <>
             {showLoginWindow && <LoginWindow setLoggedIn={props.setLoggedIn}/>}
-            <ul className="navbar">
-                {content}
-            </ul>
+            <div className="navbar">
+                <a className="navbar-item">silly todolist</a>
+                <div className='navbar-right'>{rightContent}</div>
+            </div>
         </>
     )
 }

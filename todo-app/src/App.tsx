@@ -35,7 +35,6 @@ function App() {
     return (
         <>
             <NavBar isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
-            <h1>silly todo list.</h1>
             {isLoggedIn &&
                 <>
                     <ul>{taskList}</ul>
