@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import './RegisterWindow.css'
+import { authApi } from '../../repositories/authApi';
 
 type RegisterWindowProps = {
     setLoggedIn: (value: boolean) => void; 
@@ -25,7 +26,7 @@ function RegisterWindow(props: RegisterWindowProps) {
 
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [confirmPassword, setConfirmPassword] = useState<string>('');
+    const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
 
     function handleUsernameChange(event: React.ChangeEvent<HTMLInputElement>) {
         event.preventDefault();
@@ -39,11 +40,12 @@ function RegisterWindow(props: RegisterWindowProps) {
 
     function handleConfirmPasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
         event.preventDefault();
-        setConfirmPassword(event.target.value);
+        setPasswordConfirmation(event.target.value);
     }
 
     function handleSignUpSubmit(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
+        authApi.register({username, password, passwordConfirmation});
         props.hideWindow();
     }
 
@@ -54,9 +56,9 @@ function RegisterWindow(props: RegisterWindowProps) {
                 <div className='register-window-content'>
                     <input className='register-input' placeholder='Username' value={username} onChange={handleUsernameChange}></input>
                     <input className='register-input' placeholder='Password' value={password} onChange={handlePasswordChange}></input>
-                    <input className='register-input' placeholder='Confirm password' value={confirmPassword} onChange={handleConfirmPasswordChange}></input>
+                    <input className='register-input' placeholder='Confirm password' value={passwordConfirmation} onChange={handleConfirmPasswordChange}></input>
                     <button className='register-button' onClick={handleSignUpSubmit}>Sign Up</button>
-                    <h1>Have an account?</h1><a>Sign in</a>
+                    <h1>Have an account? <a>Sign in</a></h1>
                 </div>
             </div>
         </>

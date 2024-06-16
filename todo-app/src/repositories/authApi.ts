@@ -1,4 +1,5 @@
 import { SignInRequest } from "../types/SignInRequest";
+import { SignUpRequest } from "../types/SignUpRequest";
 import { cookieApi } from "./cookieApi";
 
 class AuthApi {
@@ -19,6 +20,21 @@ class AuthApi {
             cookieApi.setJwt(res.token as string);
             return res.token as string;
         })
+    }
+
+    register(userDetails: SignUpRequest): Promise<string> {
+        return fetch(this.signUpEndpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userDetails)
+        })
+        .then(res => res.json())
+        .then(res => {
+            cookieApi.setJwt(res.token as string);
+            return res.token as string;
+        });
     }
 
     getUsername(): string {

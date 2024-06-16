@@ -5,7 +5,7 @@
     align-items: center;
     width: 250px;
     height: 400px;
-    background: black;
+    background-color: #1B1B1B;
     z-index: 1;
     left: 50%;
     top: 50%;
@@ -16,16 +16,28 @@
 .register-input {
     border-radius: 0.25rem;
     border: none;
+}
+
+.register-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.register-window-content {
+    margin-top: 20px;
+    display: grid;
+}
+
+.register-window-content * {
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: medium;
 }
 
-.register-backdrop {
-    position:fixed;
-    top:0;
-    left:0;
-    width:100vw;
-    height:100vh;
-    background-color:rgba(0,0,0,0.5);
+.register-window-content h1 {
+    display: inline-block;
 }
