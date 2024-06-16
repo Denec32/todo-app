@@ -1,4 +1,4 @@
-.register-window {
+.modal-window {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -13,12 +13,12 @@
     border-radius: 10px;
 }
 
-.register-input {
+.modal-input {
     border-radius: 0.25rem;
     border: none;
 }
 
-.register-backdrop {
+.modal-backdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -27,17 +27,17 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.register-window-content {
+.modal-content {
     margin-top: 20px;
     display: grid;
 }
 
-.register-window-content * {
+.modal-content * {
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: medium;
 }
 
-.register-window-content h1 {
+.modal-content h1 {
     display: inline-block;
 }

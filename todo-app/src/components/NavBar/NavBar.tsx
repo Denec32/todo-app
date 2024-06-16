@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import LoginWindow from '../LoginWindow/LoginWindow';
+import LoginWindow from '../Authentication/LoginWindow';
 import './NavBar.css'
 import { cookieApi } from '../../repositories/cookieApi';
 import { authApi } from '../../repositories/authApi';
-import RegisterWindow from '../RegisterWindow/RegisterWindow';
+import RegisterWindow from '../Authentication/RegisterWindow';
 
 type NavBarProps = {
     isLoggedIn: boolean
@@ -36,7 +36,9 @@ function NavBar(props: NavBarProps) {
 
     return (
         <>
-            {showLoginWindow && <LoginWindow setLoggedIn={props.setLoggedIn}/>}
+            {showLoginWindow && 
+                <LoginWindow setLoggedIn={props.setLoggedIn} isWindowVisible={showLoginWindow} hideWindow={() => setShowLoginWindow(false)}/>
+            }
             {showRegisterWindow && 
                 <RegisterWindow setLoggedIn={props.setLoggedIn} isWindowVisible={showRegisterWindow} hideWindow={() => setShowRegisterWindow(false)} />
             }
