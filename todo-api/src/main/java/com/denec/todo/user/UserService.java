@@ -14,7 +14,7 @@ public class UserService {
 
     public User create(User user) {
         if (userRepository.existsByUsername(user.getUsername())) {
-            throw new RuntimeException("Пользователь существует");
+            throw new RuntimeException("Пользователь уже существует");
         }
         
         return userRepository.save(user);

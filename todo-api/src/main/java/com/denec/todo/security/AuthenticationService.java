@@ -25,6 +25,11 @@ public class AuthenticationService {
     }
 
     public JwtAuthenticationResponse signUp(SignUpRequest request) {
+
+        if (!request.getPassword().equals(request.getPasswordConfirmation())) {
+            throw new RuntimeException("passwords do not match");
+        }
+
         var user = new User();
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
