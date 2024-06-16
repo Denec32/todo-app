@@ -3,6 +3,7 @@ import LoginWindow from '../LoginWindow/LoginWindow';
 import './NavBar.css'
 import { cookieApi } from '../../repositories/cookieApi';
 import { authApi } from '../../repositories/authApi';
+import RegisterWindow from '../RegisterWindow/RegisterWindow';
 
 type NavBarProps = {
     isLoggedIn: boolean
@@ -12,9 +13,7 @@ type NavBarProps = {
 function NavBar(props: NavBarProps) {
     const [showLoginWindow, setShowLoginWindow] = useState<boolean>(false);
 
-    function handleSignInClick() {
-        setShowLoginWindow(!showLoginWindow);
-    }
+    const [showRegisterWindow, setShowRegisterWindow] = useState<boolean>(false);
 
     function handleSignOutClick() {
         cookieApi.deleteJwt();
@@ -30,14 +29,17 @@ function NavBar(props: NavBarProps) {
         </>
     } else {
         rightContent = <>
-            <a className="navbar-item">Register</a>
-            <a className="navbar-item" onClick={handleSignInClick}>Sign in</a>
+            <a className="navbar-item" onClick={() => setShowRegisterWindow(true)}>Register</a>
+            <a className="navbar-item" onClick={() => setShowLoginWindow(true)}>Sign in</a>
         </>
     }
 
     return (
         <>
             {showLoginWindow && <LoginWindow setLoggedIn={props.setLoggedIn}/>}
+            {showRegisterWindow && 
+                <RegisterWindow setLoggedIn={props.setLoggedIn} isWindowVisible={showRegisterWindow} hideWindow={() => setShowRegisterWindow(false)} />
+            }
             <div className="navbar">
                 <a className="navbar-item">silly todolist</a>
                 <div className='navbar-right'>{rightContent}</div>

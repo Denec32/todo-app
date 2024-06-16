@@ -1,21 +1,31 @@
-.login-window {
+.register-window {
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 200px;
-    height: 300px;
+    width: 250px;
+    height: 400px;
     background: black;
     z-index: 1;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    border-radius: 10px;
 }
 
-.login-input {
-    width: 8rem;
+.register-input {
     border-radius: 0.25rem;
     border: none;
     margin-top: 10px;
     margin-bottom: 10px;
+    font-size: medium;
+}
+
+.register-backdrop {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background-color:rgba(0,0,0,0.5);
 }
