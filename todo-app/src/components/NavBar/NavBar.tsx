@@ -20,6 +20,16 @@ function NavBar(props: NavBarProps) {
         props.setLoggedIn(false);
     }
 
+    function switchAuthorizationWindow() {
+        if (showLoginWindow) {
+            setShowLoginWindow(false);
+            setShowRegisterWindow(true);
+        } else {
+            setShowLoginWindow(true);
+            setShowRegisterWindow(false);
+        }
+    }
+
     let rightContent;
 
     if (props.isLoggedIn) {
@@ -37,10 +47,10 @@ function NavBar(props: NavBarProps) {
     return (
         <>
             {showLoginWindow && 
-                <LoginWindow setLoggedIn={props.setLoggedIn} isWindowVisible={showLoginWindow} hideWindow={() => setShowLoginWindow(false)}/>
+                <LoginWindow setLoggedIn={props.setLoggedIn} isWindowVisible={showLoginWindow} hideWindow={() => setShowLoginWindow(false)} switchToRegisterWindow={switchAuthorizationWindow}/>
             }
             {showRegisterWindow && 
-                <RegisterWindow setLoggedIn={props.setLoggedIn} isWindowVisible={showRegisterWindow} hideWindow={() => setShowRegisterWindow(false)} />
+                <RegisterWindow setLoggedIn={props.setLoggedIn} isWindowVisible={showRegisterWindow} hideWindow={() => setShowRegisterWindow(false)} switchToLoginWindow={switchAuthorizationWindow}/>
             }
             <div className="navbar">
                 <a className="navbar-item">silly todolist</a>
