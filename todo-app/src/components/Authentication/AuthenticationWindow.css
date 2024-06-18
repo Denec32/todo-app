@@ -41,3 +41,7 @@
 .modal-content h1 {
     display: inline-block;
 }
+
+.switch-modal {
+    cursor: pointer;
+}

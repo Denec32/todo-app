@@ -55,7 +55,7 @@ function LoginWindow(props: LoginWindowProps) {
                     <input className='modal-input' placeholder='Username' value={username} onChange={handleUsernameChange}></input>
                     <input className='modal-input' placeholder='Password' value={password} onChange={handlePasswordChange}></input>
                     <button className='modal-button' onClick={handleSignInSubmit}>Sign In</button>
-                    <h1><a onClick={props.switchToRegisterWindow}>Sign Up</a></h1>
+                    <h1><a className='switch-modal' onClick={props.switchToRegisterWindow}>Sign Up</a></h1>
                 </div>
             </div>
         </>

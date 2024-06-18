@@ -62,7 +62,7 @@ function RegisterWindow(props: RegisterWindowProps) {
                     <input className='modal-input' placeholder='Password' value={password} onChange={handlePasswordChange}></input>
                     <input className='modal-input' placeholder='Confirm password' value={passwordConfirmation} onChange={handleConfirmPasswordChange}></input>
                     <button className='modal-button' onClick={handleSignUpSubmit}>Sign Up</button>
-                    <h1>Have an account? <a onClick={props.switchToLoginWindow}>Sign In</a></h1>
+                    <h1>Have an account? <a className='switch-modal' onClick={props.switchToLoginWindow}>Sign In</a></h1>
                 </div>
             </div>
         </>
