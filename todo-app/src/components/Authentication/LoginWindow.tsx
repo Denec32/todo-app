@@ -6,6 +6,7 @@ type LoginWindowProps = {
     setLoggedIn: (value: boolean) => void
     isWindowVisible: boolean;
     hideWindow: () => void;
+    switchToRegisterWindow: () => void;
 }
 
 function LoginWindow(props: LoginWindowProps) {
@@ -51,10 +52,10 @@ function LoginWindow(props: LoginWindowProps) {
             <div className='modal-backdrop'></div>
             <div className='modal-window' ref={windowRef}>
                     <div className='modal-content'>
-                    <input className='modal-input' placeholder='username' value={username} onChange={handleUsernameChange}></input>
-                    <input className='modal-input' placeholder='password' value={password} onChange={handlePasswordChange}></input>
-                    <button className='modal-button' onClick={handleSignInSubmit}>Sign in</button>
-                    <h1><a>Sign up</a></h1>
+                    <input className='modal-input' placeholder='Username' value={username} onChange={handleUsernameChange}></input>
+                    <input className='modal-input' placeholder='Password' value={password} onChange={handlePasswordChange}></input>
+                    <button className='modal-button' onClick={handleSignInSubmit}>Sign In</button>
+                    <h1><a onClick={props.switchToRegisterWindow}>Sign Up</a></h1>
                 </div>
             </div>
         </>
