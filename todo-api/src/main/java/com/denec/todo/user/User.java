@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.denec.todo.role.Role;
+import com.denec.todo.task.Task;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,6 +18,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -37,6 +39,16 @@ public class User implements UserDetails {
     )
     private Set<Role> roles;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Task> todoTasks;
+
+    public Set<Task> getTodoTasks() {
+        return this.todoTasks;
+    }
+
+    public void setTodoTasks(Set<Task> todoTasks) {
+        this.todoTasks = todoTasks;
+    }
 
     public Long getId() {
         return this.id;
