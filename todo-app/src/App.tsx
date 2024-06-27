@@ -13,7 +13,11 @@ function App() {
 
     useEffect(() => {
         setLoggedIn(cookieApi.hasJwt());
+
+        taskApi.getTasks()
+        .then((res) => setTasks(res)); 
     }, [isLoggedIn]);
+
 
     function deleteTask(id: number) {
         taskApi.deleteTask(id);

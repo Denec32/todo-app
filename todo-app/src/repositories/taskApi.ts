@@ -1,14 +1,22 @@
 import type { Task } from '../types/Task';
+import { cookieApi } from './cookieApi';
 
 class TaskApi {
     taskEndpointLink: string = 'http://localhost:8080/task';
 
     getTasks(): Promise<Task[]> {
-        return fetch(this.taskEndpointLink)
-            .then(res => res.json())
-            .then(res => {
-                return res as Task[]
-            })
+        return fetch(this.taskEndpointLink, {
+            method: 'GET',
+            headers: {
+                'Accept': '*/*',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + cookieApi.getJwt()
+            }
+        })
+        .then(res => res.json())
+        .then(res => {
+            return res as Task[]
+        })
     }
 
     addTask(newTask: Task): Promise<Task> {
