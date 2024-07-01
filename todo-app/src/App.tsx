@@ -15,6 +15,7 @@ function App() {
         setLoggedIn(cookieApi.hasJwt());
         if (isLoggedIn) {
             taskApi.getTasks()
+            .then((res) => res.sort((a, b) => a.id - b.id))
             .then((res) => setTasks(res)); 
         }
     }, [isLoggedIn]);
@@ -42,7 +43,7 @@ function App() {
             <NavBar isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
             {isLoggedIn &&
                 <>
-                    <ul>{taskList}</ul>
+                    <ul className='taskList'>{taskList}</ul>
                     <TaskForm onClickAdd={addTask} />
                 </>
             }

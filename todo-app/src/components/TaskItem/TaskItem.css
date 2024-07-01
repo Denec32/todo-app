@@ -1,15 +1,17 @@
-.todo-list-item {
+.todo-item {
     align-items: center;
+    margin: 20px;
 }
 
-.todo-item {
+.todo-item-input {
     text-align: left;
     width: 90%;
     border: none;
     background-color: transparent;
+    font-size: large;
 }
 
-.todo-item:focus {
+.todo-item-input:focus {
     border-color: rgba(229, 103, 23, 0.8);
     box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 1px;
     outline: 0 none;

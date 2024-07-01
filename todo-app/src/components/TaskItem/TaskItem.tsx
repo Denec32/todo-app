@@ -24,8 +24,8 @@ function TaskItem(props: TaskItemProps) {
     }
 
     return (
-        <li className="todo-list-item">
-            <input value={text} onChange={changeInput} className="todo-item"/>
+        <li className="todo-item">
+            <input value={text} onChange={changeInput} className="todo-item-input"/>
             <button onClick={deleteTask} className="delete-button">×</button>
         </li>
     )
