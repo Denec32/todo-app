@@ -4,23 +4,21 @@ import { cookieApi } from './cookieApi';
 class TaskApi {
     taskEndpointLink: string = 'http://localhost:8080/task';
 
-    getTasks(): Promise<Task[]> {
-        return fetch(this.taskEndpointLink, {
-            method: 'GET',
-            headers: {
-                'Accept': '*/*',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + cookieApi.getJwt()
-            }
-        })
-        .then(res => res.json())
-        .then(res => {
-            return res as Task[]
-        })
+    async getTasks(): Promise<Task[]> {
+        const result: Response = await fetch(this.taskEndpointLink, {
+                 method: 'GET',
+                 headers: {
+                     'Accept': '*/*',
+                     'Content-Type': 'application/json',
+                     'Authorization': 'Bearer ' + cookieApi.getJwt()
+                 }
+            });
+
+        return await result.json() as Task[];
     }
 
-    addTask(newTask: Task): Promise<Task> {
-        return fetch(this.taskEndpointLink, {
+    async addTask(newTask: Task): Promise<Task> {
+        const result: Response = await fetch(this.taskEndpointLink, {
             method: 'POST',
             headers: {
                 'Accept': '*/*',
@@ -28,15 +26,13 @@ class TaskApi {
                 'Authorization': 'Bearer ' + cookieApi.getJwt()
             },
             body: JSON.stringify(newTask)
-        })
-            .then(res => res.json())
-            .then(res => {
-                return res as Task
-            });
+        });
+
+        return await result.json() as Task;
     }
 
-    putTask(task: Task, id: number): Promise<Task> {
-        return fetch(this.taskEndpointLink + '/' + id, {
+    async putTask(task: Task, id: number): Promise<Task> {
+        const result: Response = await fetch(this.taskEndpointLink + '/' + id, {
             method: 'PUT',
             headers: {
                 'Accept': '*/*',
@@ -44,15 +40,13 @@ class TaskApi {
                 'Authorization': 'Bearer ' + cookieApi.getJwt()
             },
             body: JSON.stringify(task)
-        })
-            .then(res => res.json())
-            .then(res => {
-                return res as Task
-            });
+        });
+        
+        return await result.json() as Task;
     }
 
-    deleteTask(id: number) {
-        return fetch(this.taskEndpointLink + '/' + id, {
+    async deleteTask(id: number) {
+        await fetch(this.taskEndpointLink + '/' + id, {
             method: 'DELETE',
             headers: {
                 'Accept': '*/*',

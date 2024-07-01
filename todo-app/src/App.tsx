@@ -21,8 +21,8 @@ function App() {
 
 
     function deleteTask(id: number) {
-        taskApi.deleteTask(id);
-        setTasks(tasks.filter(task => task.id !== id));
+        taskApi.deleteTask(id)
+            .then(() => setTasks(tasks.filter(task => task.id !== id)));
     }
 
     function addTask(task: Task) {
