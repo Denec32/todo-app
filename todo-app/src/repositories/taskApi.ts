@@ -52,6 +52,11 @@ class TaskApi {
     deleteTask(id: number) {
         return fetch(this.taskEndpointLink + '/' + id, {
             method: 'DELETE',
+            headers: {
+                'Accept': '*/*',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + cookieApi.getJwt()
+            }
         });
     }
 }

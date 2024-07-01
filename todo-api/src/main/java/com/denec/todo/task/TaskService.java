@@ -16,7 +16,23 @@ public class TaskService {
         this.userService = userService;
     }
 
-    public Iterable<Task> findByUser() {
+    public Iterable<Task> findAll() {
         return taskRepository.getByUser(userService.getCurrentUser());
+    }
+
+    public void deleteById(Long id) {
+        var taskSearchResult = taskRepository.findById(id);
+
+        if (taskSearchResult.isEmpty()) {
+            throw new RuntimeException("no task found");
+        }
+
+        Task taskToDelete = taskSearchResult.get();
+
+        if (!taskToDelete.getUser().getId().equals(userService.getCurrentUser().getId())) {
+            throw new RuntimeException("wrong user");
+        }
+
+        taskRepository.deleteById(id);
     }
 }

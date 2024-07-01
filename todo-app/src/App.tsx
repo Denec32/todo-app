@@ -13,9 +13,10 @@ function App() {
 
     useEffect(() => {
         setLoggedIn(cookieApi.hasJwt());
-
-        taskApi.getTasks()
-        .then((res) => setTasks(res)); 
+        if (isLoggedIn) {
+            taskApi.getTasks()
+            .then((res) => setTasks(res)); 
+        }
     }, [isLoggedIn]);
 
 
