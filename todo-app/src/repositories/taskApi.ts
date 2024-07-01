@@ -40,7 +40,8 @@ class TaskApi {
             method: 'PUT',
             headers: {
                 'Accept': '*/*',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + cookieApi.getJwt()
             },
             body: JSON.stringify(task)
         })

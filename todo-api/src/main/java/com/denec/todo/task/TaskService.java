@@ -41,4 +41,23 @@ public class TaskService {
         task.setUser(currentUser);
         return taskRepository.save(task);
     }
+
+    public Task putTask(Task task, Long id) {
+        var taskSearchResult = taskRepository.findById(id);
+        
+        if (taskSearchResult.isEmpty()) {
+            task.setUser(userService.getCurrentUser());
+            taskRepository.save(task);
+        }
+
+        Task existingTask = taskSearchResult.get();
+        
+        if (!existingTask.getUser().getId().equals(userService.getCurrentUser().getId())) {
+            throw new RuntimeException("wrong user");
+        }
+
+        existingTask.setText(task.getText());
+
+        return taskRepository.save(existingTask);
+    }
 }
