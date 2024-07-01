@@ -24,7 +24,8 @@ class TaskApi {
             method: 'POST',
             headers: {
                 'Accept': '*/*',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + cookieApi.getJwt()
             },
             body: JSON.stringify(newTask)
         })

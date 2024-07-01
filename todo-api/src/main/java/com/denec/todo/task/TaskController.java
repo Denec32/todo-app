@@ -3,6 +3,8 @@ package com.denec.todo.task;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,6 +18,11 @@ public class TaskController {
     @GetMapping("/task")
     public Iterable<Task> getTasks() {
         return taskService.findAll();
+    }
+
+    @PostMapping("/task")
+    public Task addTask(@RequestBody Task task) {
+        return taskService.addTask(task);
     }
 
     @DeleteMapping("/task/{id}")

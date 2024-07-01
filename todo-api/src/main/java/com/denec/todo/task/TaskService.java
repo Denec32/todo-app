@@ -2,7 +2,7 @@ package com.denec.todo.task;
 
 import org.springframework.stereotype.Service;
 
-import com.denec.todo.task.exceptions.TaskNotFoundException;
+import com.denec.todo.user.User;
 import com.denec.todo.user.UserService;
 
 @Service
@@ -34,5 +34,11 @@ public class TaskService {
         }
 
         taskRepository.deleteById(id);
+    }
+
+    public Task addTask(Task task) {
+        User currentUser = userService.getCurrentUser();
+        task.setUser(currentUser);
+        return taskRepository.save(task);
     }
 }
