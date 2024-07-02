@@ -1,5 +1,7 @@
 package com.denec.todo.task;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.denec.todo.user.User;
@@ -59,5 +61,13 @@ public class TaskService {
         existingTask.setText(task.getText());
 
         return taskRepository.save(existingTask);
+    }
+
+    public void deleteAll() {
+        User currentUser = userService.getCurrentUser();
+
+        List<Long> idsToDelete = currentUser.getTodoTasks().stream().map((task) -> task.getId()).toList();
+
+        taskRepository.deleteAllById(idsToDelete);
     }
 }
