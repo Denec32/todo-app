@@ -4,6 +4,7 @@ import './NavBar.css'
 import { cookieApi } from '../../repositories/cookieApi';
 import { authApi } from '../../repositories/authApi';
 import RegisterWindow from '../Authentication/RegisterWindow';
+import UserMenu from '../UserMenu/UserMenu';
 
 type NavBarProps = {
     isLoggedIn: boolean
@@ -14,6 +15,8 @@ function NavBar(props: NavBarProps) {
     const [showLoginWindow, setShowLoginWindow] = useState<boolean>(false);
 
     const [showRegisterWindow, setShowRegisterWindow] = useState<boolean>(false);
+
+    const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
 
     function handleSignOutClick() {
         cookieApi.deleteJwt();
@@ -34,8 +37,7 @@ function NavBar(props: NavBarProps) {
 
     if (props.isLoggedIn) {
         rightContent = <>
-            <a className="navbar-item">{authApi.getUsername()}</a>
-            <a className="navbar-item" onClick={handleSignOutClick}>Sign out</a>
+            <a className="navbar-item" onClick={() => setShowUserMenu(true)}>{authApi.getUsername()}</a>
         </>
     } else {
         rightContent = <>
@@ -51,6 +53,9 @@ function NavBar(props: NavBarProps) {
             }
             {showRegisterWindow && 
                 <RegisterWindow setLoggedIn={props.setLoggedIn} isWindowVisible={showRegisterWindow} hideWindow={() => setShowRegisterWindow(false)} switchToLoginWindow={switchAuthorizationWindow}/>
+            }
+            {showUserMenu &&
+                <UserMenu signOut={() => props.setLoggedIn(false)}/>
             }
             <div className="navbar">
                 <a className="navbar-item">silly todolist</a>

@@ -55,6 +55,17 @@ class TaskApi {
             }
         });
     }
+
+    async deleteTasks() {
+        await fetch(this.taskEndpointLink, {
+            method: 'DELETE',
+            headers: {
+                'Accept': '*/*',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + cookieApi.getJwt()
+            }
+        });
+    }
 }
 
 export const taskApi = new TaskApi();

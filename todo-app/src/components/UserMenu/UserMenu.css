@@ -1,0 +1,12 @@
+.user-menu {
+    display: grid;
+    position: absolute;
+    width: 250px;
+    height: 75px;
+    background-color: #1B1B1B;
+    z-index: 1;
+    left: 93.6%;
+    top: 100px;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
