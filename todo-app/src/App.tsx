@@ -40,7 +40,7 @@ function App() {
 
     return (
         <>
-            <NavBar isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
+            <NavBar isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} clearTasks={() => setTasks([])} />
             {isLoggedIn &&
                 <>
                     <ul className='taskList'>{taskList}</ul>

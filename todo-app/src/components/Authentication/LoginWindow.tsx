@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import './AuthenticationWindow.css'
 import { authApi } from '../../repositories/authApi';
+import useOutsideAlerter from '../../hooks/useOutsideAlert';
 
 type LoginWindowProps = {
     setLoggedIn: (value: boolean) => void
@@ -10,20 +11,9 @@ type LoginWindowProps = {
 }
 
 function LoginWindow(props: LoginWindowProps) {
-    useEffect(() => {
-        if (props.isWindowVisible) {
-            document.addEventListener('mousedown', handleClickOutside);
-        }
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, [props.isWindowVisible]);
-
     const windowRef = useRef<HTMLDivElement>(null);
 
-    function handleClickOutside(ev: MouseEvent) {
-        if (windowRef.current && ev.target instanceof Element && !windowRef.current.contains(ev.target)) {
-            props.hideWindow();
-        }
-    }
+    useOutsideAlerter(windowRef, props.hideWindow);
 
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
