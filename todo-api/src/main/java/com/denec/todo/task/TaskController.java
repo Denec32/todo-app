@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class TaskController {
+class TaskController {
     private final TaskService taskService;
 
     public TaskController(TaskService taskService) {
@@ -17,27 +17,27 @@ public class TaskController {
     }
 
     @GetMapping("/task")
-    public Iterable<Task> getTasks() {
+    Iterable<Task> getTasks() {
         return taskService.findAll();
     }
 
     @PostMapping("/task")
-    public Task addTask(@RequestBody Task task) {
+    Task addTask(@RequestBody Task task) {
         return taskService.addTask(task);
     }
 
     @DeleteMapping("/task/{id}")
-    public void deleteTask(@PathVariable Long id) {
+    void deleteTask(@PathVariable Long id) {
         taskService.deleteById(id);
     } 
 
     @DeleteMapping("/task")
-    public void deleteTasks() {
+    void deleteTasks() {
         taskService.deleteAll();
     } 
 
     @PutMapping("/task/{id}")
-    public Task putTask(@RequestBody Task task, @PathVariable Long id) {
+    Task putTask(@RequestBody Task task, @PathVariable Long id) {
         return taskService.putTask(task, id);
     }
 }
