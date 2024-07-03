@@ -1,4 +1,4 @@
-package com.denec.todo.task.exceptions;
+package com.denec.todo.task;
 
 public class TaskNotFoundException extends RuntimeException {
     public TaskNotFoundException(Long id) {

@@ -2,6 +2,7 @@ package com.denec.todo.user;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +15,7 @@ public class UserService {
 
     public User create(User user) {
         if (userRepository.existsByUsername(user.getUsername())) {
-            throw new RuntimeException("User already exists");
+            throw new UsernameAlreadyTakenException(user.getUsername());
         }
         
         return userRepository.save(user);
@@ -22,7 +23,7 @@ public class UserService {
 
     public User getByUsername(String username) {
         return userRepository.findByUsername(username)
-            .orElseThrow(() -> new RuntimeException("User not found"));
+            .orElseThrow(() -> new UsernameNotFoundException(username));
     }
 
     public UserDetailsService userDetailsService() {

@@ -26,13 +26,13 @@ public class TaskService {
         var taskSearchResult = taskRepository.findById(id);
 
         if (taskSearchResult.isEmpty()) {
-            throw new RuntimeException("no task found");
+            throw new TaskNotFoundException(id);
         }
 
         Task taskToDelete = taskSearchResult.get();
 
         if (!taskToDelete.getUser().getId().equals(userService.getCurrentUser().getId())) {
-            throw new RuntimeException("wrong user");
+            throw new TaskNotOwnedByUserException(id);
         }
 
         taskRepository.deleteById(id);
@@ -55,7 +55,7 @@ public class TaskService {
         Task existingTask = taskSearchResult.get();
         
         if (!existingTask.getUser().getId().equals(userService.getCurrentUser().getId())) {
-            throw new RuntimeException("wrong user");
+            throw new TaskNotOwnedByUserException(id);
         }
 
         existingTask.setText(task.getText());
