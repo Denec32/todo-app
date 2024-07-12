@@ -7,6 +7,6 @@ import com.denec.todo.user.User;
 
 
 @Repository
-interface TaskRepository extends CrudRepository<Task, Long> {
+public interface TaskRepository extends CrudRepository<Task, Long> {
     List<Task> getByUser(User user);
 }

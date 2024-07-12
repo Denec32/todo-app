@@ -1,35 +1,36 @@
 package com.denec.todo.security;
 
-class SignUpRequest {
-
+public class SignUpRequest {
     private String username;
     private String password;
     private String passwordConfirmation;
 
-    SignUpRequest() {
+
+    public SignUpRequest() {
     }
 
-    String getUsername() {
+    public String getUsername() {
         return this.username;
     }
 
-    void setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    String getPassword() {
+    public String getPassword() {
         return this.password;
     }
 
-    void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    String getPasswordConfirmation() {
+    public String getPasswordConfirmation() {
         return this.passwordConfirmation;
     }
 
-    void setPasswordConfirmation(String passwordConfirmation) {
+    public void setPasswordConfirmation(String passwordConfirmation) {
         this.passwordConfirmation = passwordConfirmation;
     }
+
 }

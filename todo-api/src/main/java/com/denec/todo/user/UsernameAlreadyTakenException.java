@@ -1,7 +1,7 @@
 package com.denec.todo.user;
 
-class UsernameAlreadyTakenException extends RuntimeException {
-    UsernameAlreadyTakenException(String username) {
+public class UsernameAlreadyTakenException extends RuntimeException {
+    public UsernameAlreadyTakenException(String username) {
         super("name " + username + " is already taken");
     }
 }

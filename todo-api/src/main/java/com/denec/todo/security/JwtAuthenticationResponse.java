@@ -1,14 +1,15 @@
 package com.denec.todo.security;
 
-class JwtAuthenticationResponse {
-
+public class JwtAuthenticationResponse {
     private String token;
 
-    JwtAuthenticationResponse(String token) {
+
+    public JwtAuthenticationResponse(String token) {
         this.token = token;
     }
 
-    String getToken() {
+
+    public String getToken() {
         return this.token;
     }
 }

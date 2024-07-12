@@ -1,23 +1,24 @@
 package com.denec.todo.security;
 
-class SignInRequest {
-
+public class SignInRequest {
     private String username;
     private String password;
 
-    String getUsername() {
+
+    public String getUsername() {
         return this.username;
     }
 
-    void setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    String getPassword() {
+    public String getPassword() {
         return this.password;
     }
 
-    void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
+
 }
